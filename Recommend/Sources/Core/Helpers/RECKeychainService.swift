@@ -30,7 +30,7 @@ public class RECKeychainService: NSObject {
             
             if (status != errSecSuccess) {
                 if let err = SecCopyErrorMessageString(status, nil) {
-                    print("Read failed: \(err)")
+                    print("Update failed: \(err)")
                 }
             }
         }
@@ -87,7 +87,7 @@ public class RECKeychainService: NSObject {
                 contentsOfKeychain = String(data: retrievedData, encoding: String.Encoding.utf8)
             }
         } else {
-            print("Nothing was retrieved from the keychain. Status code \(status)")
+            print("Get failed: Nothing was retrieved from the keychain. Status code \(status)")
         }
         
         return contentsOfKeychain

@@ -62,6 +62,7 @@ final class RECCore {
                   !storedKeychainDeviceId.isEmpty {
             deviceId = storedKeychainDeviceId
         } else {
+            print("failed: get any prev deviceID, generating new....")
             deviceId = device.identifierForVendor?.uuidString ?? UUID().uuidString
         }
         
