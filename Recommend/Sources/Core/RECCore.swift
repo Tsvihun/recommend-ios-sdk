@@ -70,9 +70,12 @@ final class RECCore {
             throw RECInvalidDeviceIdError(deviceId: deviceId)
         }
         
-        userDefaults.deviceId = nil
-        RECKeychainService.removeItem(service: Self.keychainService, account: Self.keychainAccount)
-        RECKeychainService.saveItem(service: Self.keychainService, account: Self.keychainAccount, data: deviceId)
+        userDefaults.deviceId = deviceId
+        if storedKeychainDeviceId != nil {
+            RECKeychainService.updateItem(service: Self.keychainService, account: Self.keychainAccount, data: deviceId)
+        } else {
+            RECKeychainService.saveItem(service: Self.keychainService, account: Self.keychainAccount, data: deviceId)
+        }
         
         return deviceId
     }
