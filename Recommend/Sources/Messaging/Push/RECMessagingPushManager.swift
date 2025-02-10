@@ -102,11 +102,12 @@ final class RECMessagingPushManager {
     private func trackEvent(_ event: RECMessagingPushEvent, completion: ((Bool) -> Void)? = nil) {
         failedEvents.removeAll(where: { $0.id == event.id })
         apiService.trackPushEvent(event) { error in
-            if error != nil {
-                self.failedEvents.append(event)
-                completion?(false)
+            guard let error else {
+                completion?(true)
+                return
             }
-            completion?(true)
+            self.failedEvents.append(event)
+            completion?(false)
         }
     }
     
