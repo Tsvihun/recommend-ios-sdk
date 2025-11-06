@@ -50,6 +50,7 @@ final class RECDevice {
     
     func trackActivity(
         _ activity: [RECDeviceActivity],
+        eventData: RECDeviceEventData? = nil,
         completionHandler: ((Error?) -> Void)? = nil
     ) {
         let priceList = customerInfo.priceList?.code
@@ -63,7 +64,8 @@ final class RECDevice {
             deviceTime: .current,
             eventTime: eventTime,
             metrics: customerInfo.metrics,
-            activity: activity)
+            activity: activity,
+            eventData: eventData)
         apiService.trackActivity(data) { error in
             completionHandler?(error)
         }

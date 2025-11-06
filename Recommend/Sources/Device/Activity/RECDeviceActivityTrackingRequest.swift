@@ -18,6 +18,7 @@ struct RECDeviceActivityTrackingRequest: Encodable {
     let eventTime: Int?
     let metrics: RECMetrics?
     let activity: [RECDeviceActivity]
+    let eventData: RECDeviceEventData?
     
     // MARK: Coding
     
@@ -31,6 +32,7 @@ struct RECDeviceActivityTrackingRequest: Encodable {
         case eventTime = "event_time"
         case metrics
         case activity
+        case eventData = "event_data"
     }
     
     func encode(to encoder: Encoder) throws {
@@ -45,5 +47,6 @@ struct RECDeviceActivityTrackingRequest: Encodable {
         try container.encodeIfPresent(eventTime, forKey: .eventTime)
         try container.encodeIfPresent(metrics, forKey: .metrics)
         try container.encode(activity, forKey: .activity)
+        try container.encodeIfPresent(eventData, forKey: .eventData)
     }
 }

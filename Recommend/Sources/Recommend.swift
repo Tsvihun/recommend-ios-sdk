@@ -109,10 +109,12 @@ public final class Recommend {
     
     public func trackDeviceActivity(
         _ activity: [RECDeviceActivity],
+        eventData: RECDeviceEventData? = nil,
         completionHandler: ((Error?) -> Void)? = nil
     ) {
         device.trackActivity(
             activity,
+            eventData: eventData,
             completionHandler: completionHandler)
     }
     
